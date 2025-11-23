@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DerogationDialog</class>
+ <widget class="QDialog" name="DerogationDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>700</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>700</width>
+    <height>650</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Analyse de Dérogation - Khémisset</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/plugins/Derogation/icon.png</normaloff>:/plugins/Derogation/icon.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_main">
+   <property name="spacing">
+    <number>10</number>
+   </property>
+   <property name="leftMargin">
+    <number>15</number>
+   </property>
+   <property name="topMargin">
+    <number>15</number>
+   </property>
+   <property name="rightMargin">
+    <number>15</number>
+   </property>
+   <property name="bottomMargin">
+    <number>15</number>
+   </property>
+
+   <!-- Titre principal -->
+   <item>
+    <widget class="QLabel" name="titleLabel">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#2e7d32;&quot;&gt;Analyse de Dérogation&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#666;&quot;&gt;Ville de Khémisset, Maroc&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+
+   <!-- Séparateur -->
+   <item>
+    <widget class="Line" name="line_title">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+
+   <!-- Groupe Mode de saisie -->
+   <item>
+    <widget class="QGroupBox" name="groupBoxInputMode">
+     <property name="title">
+      <string>🔧 Mode de saisie des données</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox { font-weight: bold; }</string>
+     </property>
+     <layout class="QHBoxLayout" name="inputModeLayout">
+      <item>
+       <widget class="QCheckBox" name="checkBox">
+        <property name="text">
+         <string>📁 Fichier GeoJSON</string>
+        </property>
+        <property name="toolTip">
+         <string>Sélectionnez un fichier GeoJSON contenant la géométrie du projet</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBox_2">
+        <property name="text">
+         <string>📍 Coordonnées manuelles</string>
+        </property>
+        <property name="toolTip">
+         <string>Saisissez ou sélectionnez les coordonnées d'un point sur la carte</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacerInputMode">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- Sélection fichier GeoJSON -->
+   <item>
+    <layout class="QHBoxLayout" name="geojsonLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Fichier GeoJSON :</string>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>120</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit">
+       <property name="placeholderText">
+        <string>Aucun fichier sélectionné...</string>
+       </property>
+       <property name="toolTip">
+        <string>Chemin vers le fichier GeoJSON contenant la géométrie du projet</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>📂 Parcourir</string>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Ouvrir le navigateur de fichiers pour sélectionner un GeoJSON</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+
+   <!-- Coordonnées manuelles -->
+   <item>
+    <layout class="QVBoxLayout" name="coordMainLayout">
+     <item>
+      <layout class="QHBoxLayout" name="coordLayout">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Coordonnée X :</string>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_2">
+         <property name="placeholderText">
+          <string>Ex: 325000.50 (EPSG:26191)</string>
+         </property>
+         <property name="toolTip">
+          <string>Coordonnée X en système de projection EPSG:26191 (UTM Zone 29N)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Coordonnée Y :</string>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_3">
+         <property name="placeholderText">
+          <string>Ex: 4050000.25 (EPSG:26191)</string>
+         </property>
+         <property name="toolTip">
+          <string>Coordonnée Y en système de projection EPSG:26191 (UTM Zone 29N)</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="mapSelectLayout">
+       <item>
+        <spacer name="horizontalSpacerMapLeft">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="selectPointMapButton">
+         <property name="text">
+          <string>🗺️ Sélectionner sur la carte</string>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Cliquez pour activer l'outil de sélection sur la carte QGIS</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacerMapRight">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+
+   <!-- Configuration du buffer -->
+   <item>
+    <widget class="QGroupBox" name="groupBoxBuffer">
+     <property name="title">
+      <string>🎯 Zone d'analyse (Buffer)</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox { font-weight: bold; }</string>
+     </property>
+     <layout class="QVBoxLayout" name="bufferGroupLayout">
+      <item>
+       <layout class="QHBoxLayout" name="bufferLayout">
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Rayon du buffer :</string>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSlider" name="bufferRadiusSlider">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="minimum">
+           <number>100</number>
+          </property>
+          <property name="maximum">
+           <number>5000</number>
+          </property>
+          <property name="value">
+           <number>1000</number>
+          </property>
+          <property name="toolTip">
+           <string>Définit le rayon de la zone d'analyse autour du point sélectionné</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="bufferRadiusValueLabel">
+          <property name="text">
+           <string>1000 m</string>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+            QLabel {
+                background-color: #e3f2fd;
+                border: 1px solid #90caf9;
+                border-radius: 4px;
+                padding: 4px 8px;
+                font-weight: bold;
+                color: #1565c0;
+            }
+           </string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="bufferInfoLabel">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; color:#666;&quot;&gt;ℹ️ La zone d'analyse détermine la portée de l'étude d'impact autour du projet.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- Bouton d'exécution -->
+   <item>
+    <layout class="QHBoxLayout" name="runLayout">
+     <item>
+      <spacer name="horizontalSpacerRunLeft">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>🚀 Exécuter l'analyse</string>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+         QPushButton {
+             background-color: #4caf50;
+             color: white;
+             border: none;
+             border-radius: 6px;
+             font-weight: bold;
+             font-size: 12pt;
+         }
+         QPushButton:hover {
+             background-color: #45a049;
+         }
+         QPushButton:pressed {
+             background-color: #3d8b40;
+         }
+        </string>
+       </property>
+       <property name="toolTip">
+        <string>Lancer l'analyse de dérogation avec les paramètres définis</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacerRunRight">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+<!-- Résultats de l’analyse -->
+<item>
+ <widget class="QTableWidget" name="tableWidget">
+  <property name="columnCount">
+   <number>3</number>
+  </property>
+  <property name="rowCount">
+   <number>0</number>
+  </property>
+  <property name="horizontalHeaderLabels">
+   <stringlist>
+    <string>Couche</string>
+    <string>Surface (m²)</string>
+    <string>Pourcentage (%)</string>
+   </stringlist>
+  </property>
+  <property name="alternatingRowColors">
+   <bool>true</bool>
+  </property>
+  <property name="selectionBehavior">
+   <enum>QAbstractItemView::SelectRows</enum>
+  </property>
+  <property name="toolTip">
+   <string>Tableau des résultats de l'analyse</string>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>1</verstretch>
+   </sizepolicy>
+  </property>
+ </widget>
+</item>
+
+   <!-- Options d'export -->
+   <item>
+    <widget class="QGroupBox" name="groupBoxExport">
+     <property name="title">
+      <string>📄 Options d'export</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox { font-weight: bold; }</string>
+     </property>
+     <layout class="QVBoxLayout" name="exportGroupLayout">
+      <item>
+       <layout class="QHBoxLayout" name="pdfToggleLayout">
+        <item>
+         <widget class="QCheckBox" name="checkBox_3">
+          <property name="text">
+           <string>📋 Générer un rapport PDF</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <property name="toolTip">
+           <string>Créer un rapport PDF détaillé avec carte et résultats d'analyse</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacerPdfToggle">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="pdfPathLayout">
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Fichier de sortie :</string>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEdit_4">
+          <property name="placeholderText">
+           <string>Choisir l'emplacement du rapport PDF...</string>
+          </property>
+          <property name="toolTip">
+           <string>Chemin et nom du fichier PDF à générer</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="text">
+           <string>📁 Parcourir</string>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Sélectionner l'emplacement de sauvegarde du rapport PDF</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- Zone de statut -->
+   <item>
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>Prêt à effectuer l'analyse. Veuillez configurer les paramètres ci-dessus.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+       QLabel {
+           background-color: #f8f9fa;
+           color: #495057;
+           border: 2px solid #dee2e6;
+           border-radius: 8px;
+           padding: 12px;
+           font-size: 10pt;
+           font-family: Arial, sans-serif;
+       }
+      </string>
+     </property>
+    </widget>
+   </item>
+
+   <!-- Spacer final -->
+   <item>
+    <spacer name="verticalSpacerBottom">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>10</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
